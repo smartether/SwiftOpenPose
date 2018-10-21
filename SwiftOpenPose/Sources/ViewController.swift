@@ -2,8 +2,11 @@ import UIKit
 import CoreML
 import Vision
 import Upsurge
+//import CoreMedia
+import AVFoundation
+import MobileCoreServices
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate {
     
     //    let model = coco_pose_368()
     let model = MobileOpenPose()
@@ -12,20 +15,62 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    func onCompletion(b : Bool){
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("========")
-        //        if let image = UIImage(named: "hadou.jpg"){
-        //            print(measure(runJsonFile(image)).duration)
-        //        }
         
-        let fname = "hadou.jpg"
-        //        let fname = "person1.jpg"
-        if let image = UIImage(named: fname){
-            print(measure(runCoreML(image)).duration)
-        }
+        let captureSession = AVCaptureSession()
+        captureSession.beginConfiguration()
+        
+        let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+                                                  for: .video, position: .unspecified)
+        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: onCompletion)
+        guard
+            let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
+            captureSession.canAddInput(videoDeviceInput)
+            else { return }
+        captureSession.addInput(videoDeviceInput)
+
+        //let photoOutput = AVCapturePhotoOutput()
+        let videoFrame = AVCaptureVideoDataOutput()
+        let queue = DispatchQueue.global() //DispatchQueue(label: "com.ncy.videoQueue")
+        videoFrame.setSampleBufferDelegate(self, queue: queue)
+        guard captureSession.canAddOutput(videoFrame) else {return}
+        captureSession.addOutput(videoFrame);
+        captureSession.sessionPreset = .photo
+//        captureSession.addOutput(photoOutput)
+        captureSession.commitConfiguration()
+        
+        
+        captureSession.startRunning()
+        
+        NSLog("$$ view did loaded ...")
     }
+ 
+    
+    
+     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection){
+        NSLog("$$ captureOutput")
+        let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: nil)
+        //let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+        let dataProvider = CGDataProvider(data: imageData as! CFData)
+        let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
+        //var image = UIImage(CGImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.Right)
+        
+        //let fname = "hadou.jpg"
+        //        let fname = "person1.jpg"
+        
+        let image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
+        
+        print(measure(runCoreML(image)).duration)
+        
+    }
+ 
     
     func measure <T> (_ f: @autoclosure () -> T) -> (result: T, duration: String) {
         let startTime = CFAbsoluteTimeGetCurrent()
@@ -97,6 +142,8 @@ class ViewController: UIViewController {
         
         var keypoint = [Int32]()
         var pos = [CGPoint]()
+        var rhY = CGFloat(-1);
+        var rsY = CGFloat(-1);
         for human in humans {
             var centers = [Int: CGPoint]()
             for i in 0...CocoPart.Background.rawValue {
@@ -106,6 +153,18 @@ class ViewController: UIViewController {
                 let bodyPart = human.bodyParts[i]!
                 centers[i] = CGPoint(x: bodyPart.x, y: bodyPart.y)
                 //                centers[i] = CGPoint(x: Int(bodyPart.x * CGFloat(imageW) + 0.5), y: Int(bodyPart.y * CGFloat(imageH) + 0.5))
+                //TODO Assign y
+                if(i==2){
+                    rsY = bodyPart.y
+                }
+                if(i==4){
+                    rhY = bodyPart.y
+                }
+            }
+            
+            //TODO alert
+            if(rhY > CGFloat(0) && rsY > CGFloat(0) && rhY < rsY){
+                //alert
             }
             
             for (pairOrder, (pair1,pair2)) in CocoPairsRender.enumerated() {

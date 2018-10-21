@@ -39,6 +39,13 @@
 			remoteGlobalIDString = D8F0F147B3386C9B8BA800C19189043F;
 			remoteInfo = Upsurge;
 		};
+		F50F828D217C9F58003F925B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAB11F9C200EF5D800354701 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8FE626FF93E91ADE35069BA9A209644A;
+			remoteInfo = OpenCV;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,7 +81,7 @@
 		CAB11F9C200EF5D800354701 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		CAB3E5131FBAA44A00ECCD30 /* SwiftOpenPose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftOpenPose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAB3E5161FBAA44A00ECCD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CAB3E5181FBAA44A00ECCD30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CAB3E5181FBAA44A00ECCD30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CAB3E51B1FBAA44A00ECCD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CAB3E51D1FBAA44A00ECCD30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAB3E5201FBAA44A00ECCD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -86,6 +93,7 @@
 		CAB3E5651FBAA68A00ECCD30 /* hadou.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hadou.jpg; sourceTree = "<group>"; };
 		CAB3E5661FBAA68F00ECCD30 /* person1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = person1.jpg; sourceTree = "<group>"; };
 		CAF52F761FBAAB4A006395B1 /* person1.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = person1.bin; sourceTree = "<group>"; };
+		F58B2A29217B91F100D47315 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = SwiftOpenPose/opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +153,7 @@
 		CAB11F9D200EF5D800354701 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				F50F828E217C9F58003F925B /* opencv2.framework */,
 				CAB11FA8200EF5D800354701 /* Pods_SwiftOpenPose.framework */,
 				CAB11FAA200EF5D800354701 /* Upsurge.framework */,
 			);
@@ -162,6 +171,7 @@
 		CAB3E50A1FBAA44A00ECCD30 = {
 			isa = PBXGroup;
 			children = (
+				F58B2A29217B91F100D47315 /* opencv2.framework */,
 				CAB11F9C200EF5D800354701 /* Pods.xcodeproj */,
 				CAB3E5151FBAA44A00ECCD30 /* SwiftOpenPose */,
 				CAB3E5141FBAA44A00ECCD30 /* Products */,
@@ -215,7 +225,6 @@
 				CAB3E55A1FBAA50700ECCD30 /* Copy Freamworks */,
 				CA9A64E31FBAB32900F21802 /* CopyFiles */,
 				6342E78AC6AA68CEED177837 /* [CP] Embed Pods Frameworks */,
-				AB02CFB7B3DF08E9FFA577D6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -282,6 +291,13 @@
 			remoteRef = CAB11FA9200EF5D800354701 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F50F828E217C9F58003F925B /* opencv2.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = opencv2.framework;
+			remoteRef = F50F828D217C9F58003F925B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -338,21 +354,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftOpenPose/Pods-SwiftOpenPose-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AB02CFB7B3DF08E9FFA577D6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftOpenPose/Pods-SwiftOpenPose-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -514,21 +515,22 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U3FCTVM259;
+				DEVELOPMENT_TEAM = NP9R8HR3BA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SwiftOpenPose",
 				);
 				INFOPLIST_FILE = SwiftOpenPose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.infocom.tpo.o2.SwiftOpenPose;
+				PRODUCT_BUNDLE_IDENTIFIER = com.infocom.tpo.o2.SwiftOpenPose512;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftOpenPose/SwiftOpenPose-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -541,19 +543,20 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U3FCTVM259;
+				DEVELOPMENT_TEAM = NP9R8HR3BA;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SwiftOpenPose",
 				);
 				INFOPLIST_FILE = SwiftOpenPose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.infocom.tpo.o2.SwiftOpenPose;
+				PRODUCT_BUNDLE_IDENTIFIER = com.infocom.tpo.o2.SwiftOpenPose512;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftOpenPose/SwiftOpenPose-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
